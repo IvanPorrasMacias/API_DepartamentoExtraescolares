@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 import models
 import crud
 import database
-from schemas import AlumnoCreate, Alumno
+from schemas import AlumnoCreate, Alumno, AlumnoUpdate
 
 models.Base.metadata.create_all(bind=database.engine)
 
@@ -26,6 +26,14 @@ def create_alumno(alumno: AlumnoCreate, db: Session = Depends(get_db)):
 @app.get("/alumnos/{numero_control}", response_model=Alumno)
 def read_alumno(numero_control: int, db: Session = Depends(get_db)):
     db_alumno = crud.get_alumno(db, numero_control=numero_control)
+    if db_alumno is None:
+        raise HTTPException(status_code=404, detail="No se encontró el alumno")
+    return db_alumno
+
+# Actualizar un alumno por su número de control
+@app.patch("/alumnos/{numero_control}", response_model=Alumno) 
+def update_alumno(numero_control: int, alumno_update: AlumnoUpdate, db: Session = Depends(get_db)):
+    db_alumno = crud.update_alumno(db, numero_control=numero_control, alumno_update=alumno_update)
     if db_alumno is None:
         raise HTTPException(status_code=404, detail="No se encontró el alumno")
     return db_alumno
