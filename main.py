@@ -58,3 +58,10 @@ def read_actividad(id: int, db: Session = Depends(get_db)):
     if db_actividad is None:
         raise HTTPException(status_code=404, detail="No se encontró la actividad")
     return db_actividad
+
+@app.patch("/actividades/{id}", response_model=schemas.Actividad)
+def update_actividad(id: int, actividad_update: schemas.ActividadUpdate,db: Session = Depends(get_db)):
+    db_actividad = crud.update_actividad(db, id=id, actividad_update=actividad_update)
+    if db_actividad is None:
+        raise HTTPException(status_code=404, detail="No se encontró la actividad")
+    return db_actividad

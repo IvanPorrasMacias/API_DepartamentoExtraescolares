@@ -40,5 +40,16 @@ def create_actividad(db: Session, actividad: schemas.ActividadCreate):
     db.refresh(db_actividad)
     return db_actividad
 
+# Leer un actividad por su id
 def read_actividad(db: Session, id: int):
     return db.query(models.Actividades).filter(models.Actividades.id == id).first()
+
+# Actualizar una aactividad por su id
+def update_actividad(db: Session, id: int, actividad_update: schemas.ActividadUpdate):
+    actividad = read_actividad(db, id=id)
+    if actividad:
+        for key,value in actividad_update.model_dump(exclude_unset=True).items():
+            setattr(actividad, key, value)
+        db.commit()
+        db.refresh(actividad)
+    return actividad

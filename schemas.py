@@ -39,3 +39,9 @@ class Actividad(ActividadBase):
     id: int
     class Config:
         from_attributes = True
+
+# Modelo para la actualización de la actividad
+class ActividadUpdate(BaseModel):
+    nombre: Optional[str] = None
+    horario: Optional[str] = None
+    grupo: Optional[str] = None
