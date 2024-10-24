@@ -59,9 +59,18 @@ def read_actividad(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No se encontró la actividad")
     return db_actividad
 
+# Actualizar una actividad por su id
 @app.patch("/actividades/{id}", response_model=schemas.Actividad)
-def update_actividad(id: int, actividad_update: schemas.ActividadUpdate,db: Session = Depends(get_db)):
+def update_actividad(id: int, actividad_update: schemas.ActividadUpdate, db: Session = Depends(get_db)):
     db_actividad = crud.update_actividad(db, id=id, actividad_update=actividad_update)
+    if db_actividad is None:
+        raise HTTPException(status_code=404, detail="No se encontró la actividad")
+    return db_actividad
+
+# Borrar una actividad por su id
+@app.delete("/actividades/{id}", response_model=schemas.Actividad)
+def delete_actividad(id: int, db: Session = Depends(get_db)):
+    db_actividad = crud.delete_actividad(db=db, id=id)
     if db_actividad is None:
         raise HTTPException(status_code=404, detail="No se encontró la actividad")
     return db_actividad

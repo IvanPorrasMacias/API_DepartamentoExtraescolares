@@ -53,3 +53,11 @@ def update_actividad(db: Session, id: int, actividad_update: schemas.ActividadUp
         db.commit()
         db.refresh(actividad)
     return actividad
+
+# Borrar una actividad por su id
+def delete_actividad(db: Session, id: int):
+    actividad = read_actividad(db, id)
+    if actividad:
+        db.delete(actividad)
+        db.commit()
+    return actividad
