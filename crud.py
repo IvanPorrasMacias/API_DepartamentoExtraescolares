@@ -31,3 +31,11 @@ def delete_alumno(db: Session, numero_control: int):
         db.delete(alumno)
         db.commit()
     return alumno
+
+# Crear una nueva Actividad en la base de datos
+def create_actividad(db: Session, actividad: schemas.ActividadCreate):
+    db_actividad = models.Actividades(**actividad.model_dump())
+    db.add(db_actividad)
+    db.commit()
+    db.refresh(db_actividad)
+    return db_actividad

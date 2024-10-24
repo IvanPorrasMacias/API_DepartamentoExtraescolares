@@ -23,3 +23,19 @@ class AlumnoUpdate(BaseModel):
     numero_control: Optional[int] = None
     semestre: Optional[int] = None
     carrera: Optional[str] = None
+
+# Modelo Pydantic para la Actividad
+class ActividadBase(BaseModel):
+    nombre: str
+    horario: str
+    grupo: str
+
+# Modelo para creación de una Actividad
+class ActividadCreate(ActividadBase):
+    pass
+
+# Modelo para representar una Actividad
+class Actividad(ActividadBase):
+    id: int
+    class Config:
+        from_attributes = True
