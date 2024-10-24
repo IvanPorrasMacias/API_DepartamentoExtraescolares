@@ -74,3 +74,32 @@ def delete_actividad(id: int, db: Session = Depends(get_db)):
     if db_actividad is None:
         raise HTTPException(status_code=404, detail="No se encontró la actividad")
     return db_actividad
+
+# Crear una relación Alumno-Actividad
+@app.post("/actividades_alumno/", response_model=schemas.ActividadesAlumno)
+def create_actividades_alumno(actividades_alumno: schemas.ActividadesAlumnoCreate, db: Session = Depends(get_db)):
+    return crud.create_actividades_alumno(db=db, actividades_alumno=actividades_alumno)
+
+# Obtener una relación Alumno-Actividad por ID
+@app.get("/actividades_alumno/{actividades_alumno_id}", response_model=schemas.ActividadesAlumno)
+def read_actividades_alumno(actividades_alumno_id: int, db: Session = Depends(get_db)):
+    db_actividades_alumno = crud.get_actividades_alumno(db, actividades_alumno_id)
+    if db_actividades_alumno is None:
+        raise HTTPException(status_code=404, detail="Relación no encontrada")
+    return db_actividades_alumno
+
+# Actualizar una relación Alumno-Actividad
+@app.patch("/actividades_alumno/{actividades_alumno_id}", response_model=schemas.ActividadesAlumno)
+def update_actividades_alumno(actividades_alumno_id: int, actividades_alumno: schemas.ActividadesAlumnoCreate, db: Session = Depends(get_db)):
+    db_actividades_alumno = crud.update_actividades_alumno(db, actividades_alumno_id, actividades_alumno)
+    if db_actividades_alumno is None:
+        raise HTTPException(status_code=404, detail="Relación no encontrada")
+    return db_actividades_alumno
+
+# Borrar una relación Alumno-Actividad
+@app.delete("/actividades_alumno/{actividades_alumno_id}", response_model=schemas.ActividadesAlumno)
+def delete_actividades_alumno(actividades_alumno_id: int, db: Session = Depends(get_db)):
+    db_actividades_alumno = crud.delete_actividades_alumno(db, actividades_alumno_id)
+    if db_actividades_alumno is None:
+        raise HTTPException(status_code=404, detail="Relación no encontrada")
+    return db_actividades_alumno

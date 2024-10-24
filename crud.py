@@ -61,3 +61,33 @@ def delete_actividad(db: Session, id: int):
         db.delete(actividad)
         db.commit()
     return actividad
+
+# Crear una nueva relación entre Alumno y Actividad
+def create_actividades_alumno(db: Session, actividades_alumno: schemas.ActividadesAlumnoCreate):
+    db_actividades_alumno = models.ActividadesAlumno(**actividades_alumno.model_dump())
+    db.add(db_actividades_alumno)
+    db.commit()
+    db.refresh(db_actividades_alumno)
+    return db_actividades_alumno
+
+# Obtener una relación Alumno-Actividad por ID
+def get_actividades_alumno(db: Session, actividades_alumno_id: int):
+    return db.query(models.ActividadesAlumno).filter(models.ActividadesAlumno.id == actividades_alumno_id).first()
+
+# Actualizar una relación Alumno-Actividad
+def update_actividades_alumno(db: Session, actividades_alumno_id: int, actividades_alumno_update: schemas.ActividadesAlumnoCreate):
+    db_actividades_alumno = get_actividades_alumno(db, actividades_alumno_id)
+    if db_actividades_alumno:
+        for key, value in actividades_alumno_update.model_dump().items():
+            setattr(db_actividades_alumno, key, value)
+        db.commit()
+        db.refresh(db_actividades_alumno)
+    return db_actividades_alumno
+
+# Borrar una relación Alumno-Actividad
+def delete_actividades_alumno(db: Session, actividades_alumno_id: int):
+    db_actividades_alumno = get_actividades_alumno(db, actividades_alumno_id)
+    if db_actividades_alumno:
+        db.delete(db_actividades_alumno)
+        db.commit()
+    return db_actividades_alumno

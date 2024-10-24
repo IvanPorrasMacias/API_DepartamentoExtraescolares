@@ -45,3 +45,19 @@ class ActividadUpdate(BaseModel):
     nombre: Optional[str] = None
     horario: Optional[str] = None
     grupo: Optional[str] = None
+
+# Modelo base para ActividadesAlumno
+class ActividadesAlumnoBase(BaseModel):
+    alumno_id: int
+    actividad_id: int
+
+# Modelo para crear ActividadesAlumno
+class ActividadesAlumnoCreate(ActividadesAlumnoBase):
+    pass
+
+# Modelo para representar ActividadesAlumno
+class ActividadesAlumno(ActividadesAlumnoBase):
+    id: int
+
+    class Config:
+        from_attributes = True
