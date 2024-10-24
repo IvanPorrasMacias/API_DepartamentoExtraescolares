@@ -37,3 +37,11 @@ def update_alumno(numero_control: int, alumno_update: AlumnoUpdate, db: Session 
     if db_alumno is None:
         raise HTTPException(status_code=404, detail="No se encontró el alumno")
     return db_alumno
+
+# Borrar un alumno por su número de control
+@app.delete("/alumnos/{numero_control}", response_model=Alumno)
+def delete_alumno(numero_control: int, db: Session = Depends(get_db)):
+    db_alumno = crud.delete_alumno(db, numero_control=numero_control)
+    if db_alumno is None:
+        raise HTTPException(status_code=404, detail="No se encontró el alumno")
+    return db_alumno
