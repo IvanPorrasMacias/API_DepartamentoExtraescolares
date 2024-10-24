@@ -25,7 +25,7 @@ def create_alumno(alumno: schemas.AlumnoCreate, db: Session = Depends(get_db)):
 # Leer un Alumno por su número de control
 @app.get("/alumnos/{numero_control}", response_model=schemas.Alumno)
 def read_alumno(numero_control: int, db: Session = Depends(get_db)):
-    db_alumno = crud.get_alumno(db, numero_control=numero_control)
+    db_alumno = crud.read_alumno(db, numero_control=numero_control)
     if db_alumno is None:
         raise HTTPException(status_code=404, detail="No se encontró el alumno")
     return db_alumno
@@ -50,3 +50,11 @@ def delete_alumno(numero_control: int, db: Session = Depends(get_db)):
 @app.post("/actividades/", response_model=schemas.ActividadCreate)
 def create_actividad(actividad: schemas.ActividadCreate, db: Session = Depends(get_db)):
     return crud.create_actividad(db=db, actividad=actividad)
+
+# Leer una Actividad por su id
+@app.get("/actividades/{id}", response_model=schemas.Actividad)
+def read_actividad(id: int, db: Session = Depends(get_db)):
+    db_actividad = crud.read_actividad(db, id=id)
+    if db_actividad is None:
+        raise HTTPException(status_code=404, detail="No se encontró la actividad")
+    return db_actividad
