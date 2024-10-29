@@ -102,7 +102,7 @@ Este proyecto contiene una API REST para la gestión de actividades extraescolar
 
 ![image](https://github.com/user-attachments/assets/30eebc5f-61d9-45ff-a1d9-a4ffaffe4391)
 
-- DELETE actividad por su id
+- DELETE actividades_alumno por su id
 
 ![image](https://github.com/user-attachments/assets/613b7aaa-2f11-4eed-8c2b-f8668ce12464)
 
