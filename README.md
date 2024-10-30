@@ -56,7 +56,11 @@ Este proyecto contiene una API REST para la gestión de actividades extraescolar
          }
          }
    
-3. Ejecuta el pipeline y ahora puedes realizar pruebas con Postman, a continuación se muestran algunos ejemplos
+3. Ejecuta el pipeline y ahora puedes realizar pruebas con Postman
+
+![image](https://github.com/user-attachments/assets/84e3f1ef-ad81-46e1-be74-6f0a77bbd39f)
+
+A continuación se muestran algunos ejemplos
 
 - POST alumno
 
