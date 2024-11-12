@@ -110,4 +110,10 @@ A continuación se muestran algunos ejemplos
 
 ![image](https://github.com/user-attachments/assets/613b7aaa-2f11-4eed-8c2b-f8668ce12464)
 
+## Créditos a todos los colaboradores
+
+- Ivan Porras Macias
+- Brandon Aguiñaga Castañeda
+- Kevin Jesús Martín Lopez Doblado
+- Erik Uriel Lopez Salinas
 
